@@ -1,14 +1,14 @@
 import './App.css'; 
-import { TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
+import { FormEvent, useState } from 'react';
 
 //Draft/POC BF Claculator Reference: https://www.bmi-calculator.net/body-fat-calculator/body-fat-formula.php
-//Male
 function MaleBF( totalBodyWeight:number, waistMeasurement:number ){
   const leanBodyMass = (totalBodyWeight*1.082) + 94.42 - waistMeasurement*4.15;
   const bodyFatWeight = totalBodyWeight - leanBodyMass;
   return (bodyFatWeight/totalBodyWeight)*100;
 }
-//Female
+
 function FemaleBF( totalBodyWeight:number, waistMeasurement:number, wristMeasurement:number, hipMeasurement:number, forearmMeasurement:number ){
   // Deviating a bit form the structure of how the webpage instructs to arrange the varaibles.
   // LeanBodyMass = Factor1 - Factor3 - Factor4 + Factor2 + Factor5
@@ -17,31 +17,59 @@ function FemaleBF( totalBodyWeight:number, waistMeasurement:number, wristMeasure
   return (bodyFatWeight/totalBodyWeight)*100;
 }
 
+function clicky(){
+  console.log(MaleBF(234.7,44));
+  console.log(FemaleBF(130, 30, 3, 36, 15));
+}
+
 
 function App() {
+  const [maleBodyWeight,      setMaleBodyWeight ] = useState('')
+  const [maleWaistMeasue,     setMaleWaistMeasue] = useState('')
+
+  const [femaleBodyWeight,    setFemaleBodyWeight    ] = useState('')
+  const [femaleWaistMeasue,   setFemaleWaistMeasure  ] = useState('')
+  const [femalewristMeasure,  setFemaleWristMeasure  ] = useState('')
+  const [femaleHipMeasure,    setFemaleHipMeasure    ] = useState('')
+  const [femaleForearmMeasue, setFemaleForearmMeasure] = useState('')
+
+  const handleSubmit = (e:FormEvent) => {
+    e.preventDefault() //Before refreshing lets do some checks first
+    if(maleBodyWeight && maleWaistMeasue) {
+      console.log( `Male Body Fat Percentage:${ MaleBF( Number(maleBodyWeight), Number(maleWaistMeasue) ) }`)
+    }
+    else if( femaleBodyWeight && femaleWaistMeasue && femalewristMeasure && femaleHipMeasure && femaleHipMeasure && femaleForearmMeasue){
+      console.log( `Female Body Fat Percentage:${ FemaleBF( Number(femaleBodyWeight), Number(femaleWaistMeasue), Number(femalewristMeasure), Number(femaleHipMeasure), Number(femaleForearmMeasue) ) }`)
+    }
+  }
+
   return (
     <div className="App">
-      <div>
-        <form>
+      <form onSubmit = {handleSubmit}>
+        <div>
           <Typography variant="h2">Body Fat: Male</Typography>
-          <TextField id="outlined-basic" label="Total Body Weight" variant="outlined" />
-          <TextField id="outlined-basic" label="Waist Measurement" variant="outlined" />
-        </form>
-      </div>
-      <div>
-        <form>
+          <TextField onChange={(e)=>setMaleBodyWeight(e.target.value)} id="outlined-basic" label="Total Body Weight" variant="outlined" />
+          <TextField onChange={(e)=>setMaleWaistMeasue(e.target.value)} id="outlined-basic" label="Waist Measurement" variant="outlined" />
+        </div>
+        <div>
           <Typography variant="h2">Body Fat: Female</Typography>
-          <TextField id="outlined-basic" label="Total Body Weight" variant="outlined" />
-          <TextField id="outlined-basic" label="Waist Measurement" variant="outlined" />
-          <TextField id="outlined-basic" label="Wrist Measurement" variant="outlined" />
-          <TextField id="outlined-basic" label="Hip Measurement" variant="outlined" />
-          <TextField id="outlined-basic" label="Forarm Measurement" variant="outlined" />
-        </form>
-      </div>
+          <TextField onChange={(e)=>setFemaleBodyWeight(e.target.value)} id="outlined-basic" label="Total Body Weight" variant="outlined" />
+          <TextField onChange={(e)=>setFemaleWaistMeasure(e.target.value)} id="outlined-basic" label="Waist Measurement" variant="outlined" />
+          <TextField onChange={(e)=>setFemaleWristMeasure(e.target.value)} id="outlined-basic" label="Wrist Measurement" variant="outlined" />
+          <TextField onChange={(e)=>setFemaleHipMeasure(e.target.value)} id="outlined-basic" label="Hip Measurement"   variant="outlined" />
+          <TextField onChange={(e)=>setFemaleForearmMeasure(e.target.value)} id="outlined-basic" label="Forarm Measurement" variant="outlined" />
+        </div>
+        <div><Button
+              variant="contained"
+              type='submit'
+              > 
+              Calculate Body Fat
+              </Button>
+        </div>
+      </form>
     </div>
   );
 }
 
-console.log(MaleBF(234.7,44))
-console.log(FemaleBF(130, 30, 3, 36, 15))
+
 export default App;
