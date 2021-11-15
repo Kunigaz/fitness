@@ -1,0 +1,23 @@
+App Design: Based on https://www.bmi-calculator.net/body-fat-calculator/body-fat-formula.php
+    i. Calculation
+        Body Fat Formula For Men
+        Factor 1	        (Total body weight x 1.082) + 94.42
+        Factor 2	        Waist measurement x 4.15
+        Lean Body Mass	    Factor 1 - Factor 2
+        Body Fat Weight	    Total bodyweight - Lean Body Mass
+        Body Fat Percentage	(Body Fat Weight x 100) / total bodyweight
+
+        
+        Body Fat Formula For Women
+        Factor 1	(Total body weight x 0.732) + 8.987
+        Factor 2	Wrist measurement (at fullest point) / 3.140
+        Factor 3	Waist measurement (at naval) x 0.157
+        Factor 4	Hip measurement (at fullest point) x 0.249
+        Factor 5	Forearm measurement (at fullest point) x 0.434
+        Lean Body Mass	Factor 1 + Factor 2 - Factor 3 - Factor 4 + Factor 5
+        Body Fat Weight	Total bodyweight - Lean Body Mass
+        Body Fat Percentage	(Body Fat Weight x 100) / total bodyweight            
+Layout
+    //Ignore
+Style
+    //Ignore
