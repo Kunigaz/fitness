@@ -1,6 +1,7 @@
 import './App.css'; 
 import { Button, TextField, Typography } from '@mui/material';
 import { FormEvent, useState } from 'react';
+import { BodyFatCalcForm } from './body-fat-calculator/components/BodyFatCalcForm';
 
 //Draft/POC BF Claculator Reference: https://www.bmi-calculator.net/body-fat-calculator/body-fat-formula.php
 function MaleBF( totalBodyWeight:number, waistMeasurement:number ){
@@ -21,7 +22,6 @@ function clicky(){
   console.log(MaleBF(234.7,44));
   console.log(FemaleBF(130, 30, 3, 36, 15));
 }
-
 
 function App() {
   const [maleBodyWeight,      setMaleBodyWeight ] = useState('')
@@ -45,11 +45,11 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit = {handleSubmit}>
+      <BodyFatCalcForm />
+      {/* <form onSubmit = {handleSubmit}>
         <div>
           <Typography variant="h2">Body Fat: Male</Typography>
-          <TextField onChange={(e)=>setMaleBodyWeight(e.target.value)} id="outlined-basic" label="Total Body Weight" variant="outlined" />
-          <TextField onChange={(e)=>setMaleWaistMeasue(e.target.value)} id="outlined-basic" label="Waist Measurement" variant="outlined" />
+          >
         </div>
         <div>
           <Typography variant="h2">Body Fat: Female</Typography>
@@ -59,14 +59,10 @@ function App() {
           <TextField onChange={(e)=>setFemaleHipMeasure(e.target.value)} id="outlined-basic" label="Hip Measurement"   variant="outlined" />
           <TextField onChange={(e)=>setFemaleForearmMeasure(e.target.value)} id="outlined-basic" label="Forarm Measurement" variant="outlined" />
         </div>
-        <div><Button
-              variant="contained"
-              type='submit'
-              > 
-              Calculate Body Fat
-              </Button>
+        <div>
+          <Button variant="contained" type='submit'>Calculate Body Fat</Button>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 }
